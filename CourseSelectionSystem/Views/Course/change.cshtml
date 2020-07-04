@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "change";
+    var oldInf = (CourseInf)ViewData["oldInf"];
+    var id = (int)ViewData["id"];
+    var flag = (bool)ViewData["flag"];
+}
+
+    <section>
+        <div class="container-fluid">
+            <header>
+                <h1 class="h3 display">修改课程</h1>
+            </header>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-inline" method="post">
+                            <div class="form-group">
+                                <input id="inlineFormInput" type="text" placeholder="课程编号" class="mr-3 form-control" name="id">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="查询" class="mr-3 btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                    @if (oldInf != null)
+                    {
+                        <div class="card-body">
+                            <form class="form-horizontal" method="post">
+                                <div class="form-group row">
+                                    <input type="text" name="id" style="display: none;" value="@oldInf.Code">
+                                    <label class="col-sm-2 form-control-label">课程名</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="Name" value="@oldInf.Name" placeholder="null">
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 form-control-label">学分</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="Credit" value="@oldInf.Credit" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 form-control-label">课程类别<br></label>
+                                    <div class="col-sm-10">
+                                        @if (oldInf.IsElective == 1)
+                                        {
+                                            <div>
+                                                <input id="optionsRadios1" type="radio" value="1" name="IsElective" checked>
+                                                <label for="optionsRadios1">选修</label>
+                                            </div>
+                                            <div>
+                                                <input id="optionsRadios2" type="radio" value="0" name="IsElective">
+                                                <label for="optionsRadios2">必修</label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div>
+                                                <input id="optionsRadios1" type="radio" value="1" name="IsElective">
+                                                <label for="optionsRadios1">选修</label>
+                                            </div>
+                                            <div>
+                                                <input id="optionsRadios2" type="radio" value="0" name="IsElective" checked>
+                                                <label for="optionsRadios2">必修</label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4 offset-sm-2">
+                                        <button type="submit" class="btn btn-primary">提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                            @if (flag)
+                            {
+                                <a>课程已成功修改</a>
+                            }
+                            else if (id != 0)
+                            {
+                                <a>课程修改失败</a>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    

@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewData["Title"] = "select";
+    var courseInf = ViewData["courseInf"] as List<CourseInf>;
+    var studentInf = ViewData["studentInf"] as List<StudentInf>;
+    var id = (int)ViewData["id"];
+    var flag = (bool)ViewData["flag"];
+}
+
+
+    <section>
+        <div class="container-fluid">
+            <header>
+                <h1 class="h3 display">新建选课</h1>
+            </header>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-horizontal" action="/Selection/select" method="post">
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">学生学号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="StudentId">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">课程编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CourseId">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-4 offset-sm-2">
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                        @if (flag)
+                        {
+                            <a>选课成功</a>
+                        }
+                        else if (id != 0)
+                        {
+                            <a>选课失败</a>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h4>课程信息</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>课程编号</th>
+                                            <th>课程名</th>
+                                            <th>课程性质</th>
+                                            <th>学分</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in courseInf)
+                                        {
+                                            <tr>
+                                                <th scope="row">@item.Code</th>
+                                                <td>@item.Name</td>
+                                                @if (item.IsElective == 1)
+                                                {
+                                                    <td>选修</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>必修</td>
+                                                }
+                                                <td>@item.Credit</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center">
+                            <h4>学生信息</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>学号</th>
+                                            <th>姓名</th>
+                                            <th>班级</th>
+                                            <th>已获学分</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in studentInf)
+                                        {
+                                            <tr>
+                                                <th scope="row">@item.Id</th>
+                                                <td>@item.Name</td>
+                                                <td>@item.Class</td>
+                                                <td>@item.Credit</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

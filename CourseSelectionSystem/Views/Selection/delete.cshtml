@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "delete";
+    var id = (int)ViewData["id"];
+    var flag = (bool)ViewData["flag"];
+}
+
+    <section>
+        <div class="container-fluid">
+            <header>
+                <h1 class="h3 display">删除选课</h1>
+            </header>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-horizontal" action="/Selection/delete" method="post">
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">学生学号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="StudentId">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 form-control-label">课程编号</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="CourseId">
+                                </div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="form-group row">
+                                <div class="col-sm-4 offset-sm-2">
+                                    <button type="submit" class="btn btn-danger">删除</button>
+                                </div>
+                            </div>
+                        </form>
+                        @if (flag)
+                        {
+                            <a>退选成功</a>
+                        }
+                        else if (id != 0)
+                        {
+                            <a>退选失败</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
